@@ -17,8 +17,8 @@ corresponding to the species "__source()"
 
 from pysb import *
 from pysb.util import *
-#from macros import *
-from pysb.macros import *
+from macros import *
+#from pysb.macros import *
 
 Model()
 
