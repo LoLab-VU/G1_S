@@ -42,7 +42,7 @@ y['OBSp21']=y['OBSp21']/max(y['OBSp21'])
 ##########
 ## Plot ##
 ##########
-pl.ion()
+# pl.ion()
 pl.figure()
 
 pl.plot(y['OBSp53'], label="p53")
@@ -55,5 +55,6 @@ else:
 	pl.plot(y['OBSI'], label="I")
 	pl.plot(y['OBSMdm'], label="Mdm2")
 	pl.plot(y['OBSp21'], label="p21")
-#pl.legend()
+pl.legend(loc='lower left')
+pl.show()
 
