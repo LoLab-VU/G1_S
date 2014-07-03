@@ -79,21 +79,21 @@ def declare_parameters():
 	Parameter("Y11_0", 1.00e-03)	# 	p27/CycD/CDK4/6 (-P)
 	Parameter("Y12_0", 1.00e+00)	# 	p27/CycE/CDK2 (-P)
 	Parameter("Y13_0", 1.00e-04)	# 	p27/CycA/CDK2 (-P)
-	Parameter("Y14_0", 0       )	# 	p21
-	Parameter("Y15_0", 0       )	# 	p21/CycD/CDK4/6 (-P)
-	Parameter("Y16_0", 0       )	# 	p21/CycE/CDK2 (-P)
-	Parameter("Y17_0", 0       )	# 	p21/CycA/CDK2 (-P)
+	Parameter("Y14_0", 0.00e+00)	# 	p21
+	Parameter("Y15_0", 0.00e+00)	# 	p21/CycD/CDK4/6 (-P)
+	Parameter("Y16_0", 0.00e+00)	# 	p21/CycE/CDK2 (-P)
+	Parameter("Y17_0", 0.00e+00)	# 	p21/CycA/CDK2 (-P)
 	Parameter("Y18_0", 1.00e-03)	# 	p16
 	Parameter("Y19_0", 1.95e+00)	# 	Rb/E2F
 	Parameter("Y20_0", 1.00e-03)	# 	Rb-PP/E2F
-	Parameter("Y21_0", 0       )	# 	E2F
+	Parameter("Y21_0", 0.00e+00)	# 	E2F
 	Parameter("Y22_0", 1.00e-02)	# 	Rb-PPPP
 	Parameter("Y23_0", 5.00e-02)	# 	Rb
 	Parameter("Y24_0", 2.65e-02)	# 	p53
 	Parameter("Y25_0", 2.35e-04)	# 	Mdm2
 	Parameter("Y26_0", 1.00e-04)	# 	X
-	Parameter("Y27_0", 0       )	# 	I
-	Parameter("DDS_0")			# 	DDS
+	Parameter("Y27_0", 0.00e+00)	# 	I
+	Parameter("DDS_0")				# 	DDS
 	
 	##### Table A.2 #####
 	# Kinetic parameters of proposed model
@@ -244,7 +244,7 @@ def declare_functions():
 	Expression("create_Mdm2", sympify("k66*OBS_Int**9/(k65**9 + OBS_Int**9)"))
 	Expression("create_Int", sympify("(k70*OBS_p53*signal)/(1 + k71*OBS_p53*OBS_Mdm2)"))
 	Expression("sig_deg", sympify("k74 - k73*(signal-signal_damp)"))
-# 	Expression("kdamp_DDS0", sympify("k75*DDS_0"))
+	Expression("kdamp_DDS0", sympify("k75*DDS_0"))
 
 ###########
 ## Rules ##
@@ -253,7 +253,7 @@ def declare_functions():
 def simulate_signal_degradation():
 # 	##### DNA Damage Signal ####
 	Rule('Signal_Degrade', Signal() >> None, k72)
-	Rule('Signal_Damp', SignalDamp() >> None, k75)
+	Rule('Signal_Damp', SignalDamp() >> None, kdamp_DDS0)
 	
 
 
@@ -274,11 +274,14 @@ def p16_p27_inhibition():
 	#TODO: Clean up below
 	equilibrate(CycD(c=None) + CDK46(Y='u',b=None,c=None), CycD(c=1) % CDK46(Y='p',b=None,c=1), [k3, k4])			#3	Activation of CDK4/6 by CycD
 	Rule("R4", CycD(c=1) % CDK46(Y='p',b=None,c=1) >> CDK46(Y='u',b=None,c=None), k13)	#4	Degradation of bound CycD
-# 	Rule("R14", p16(b=None) + CycD(c=1) % CDK46(Y='p',b=None,c=1) >> None, k44)   		#14 Degradation of p16/CycD/CDK4/6 complex
+	
+	Rule("Degrade_p16_from_CycD_CDK46", p16(b=None) + CycD(c=1) % CDK46(Y='p',b=None,c=1) >>  p16(b=None), k44)   		#14 Degradation of p16/CycD/CDK4/6 complex
 	catalyze_one_step(CycE(c=1) % CDK2(Y='p',b=None,c=1), p27(b=None), None, k35)		#6	Degradation of p27 by CycE/CDK2 complex
 # 	catalyze_one_step(CycA(c=1) % CDK2(Y='p',b=None,c=1), p27(b=None), None, k36)		#8	Degradation of p27 by CycA/CDK2 complex
+	Rule("Degrade_p27_from_CycA_CDK2P", p27(b=None) + CycA(c=1) % CDK2(Y='p',b=None,c=1) >> CycA(c=1) % CDK2(Y='p',b=None,c=1), k36)
 # 	catalyze_one_step(Rb(b=None,Y='u'), p16(b=None), None, k41)							#12 Inhibition of p16 by pRb
 	Rule("Create_p16", None >> p16(b=None), create_p16)
+	
 
 # Figure 2 in Iwamoto et al.
 # Reactions 15-30
@@ -333,7 +336,7 @@ def Rb_E2F_activation():
 	#44 Inhibition of Rb by p16
 # 	catalyze_one_step(p16(b=None), Rb(Y='u',b=None), None, k58)
 	Rule("R31", E2F(b=None) + Rb(b=None,Y='u') >> E2F(b=2) % Rb(b=2,Y='u'), k45)	#31
-	Rule("R41", Rb(b=None, Y='pppp') >> None, k55)	#41
+	Rule("R41", Rb(b=None, Y='pppp') >> Rb(b=None,Y='u'), k55)	#41
 	Rule("Create_Rb", None >> Rb(b=None, Y='u'), create_Rb)
 	
 	

@@ -1,4 +1,4 @@
-from fan_modules import *
+from fan_modules_mod import *
 from pysb import *
 from pysb.util import *
 from pysb.macros import *
@@ -44,9 +44,10 @@ print model.parameters['k67'].value
 #     print monomers
 # print
 #   
-# for parameters in model.parameters:
-#     print parameters
-# print
+# for i in range(len(model.parameters)):
+#     print str(i) + ":"
+#     print model.parameters[i]
+
 #  
 # for initial_conditions in model.initial_conditions:
 #     print initial_conditions
@@ -78,17 +79,17 @@ from pysb.generator.bng import BngGenerator
 print BngGenerator(model).get_content()
 
 def normalize_output(y):
-	y['OBS_CycA']/=max(y['OBS_CycA'])
-	y['OBS_CycE']/=max(y['OBS_CycE'])
-	y['OBS_E2F']/=max(y['OBS_E2F'])
-	y['OBS_p53']/=max(y['OBS_p53'])
-	y['OBS_p27']/= max(y['OBS_p27'])
+	y['OBS_CycA']/=max(y['OBS_CycA']) if max(y['OBS_CycA']) > 0.0 else y['OBS_CycA']
+	y['OBS_CycE']/=max(y['OBS_CycE']) if max(y['OBS_CycE']) > 0.0 else y['OBS_CycE']
+	y['OBS_E2F']/=max(y['OBS_E2F']) if max(y['OBS_E2F']) > 0.0 else y['OBS_E2F']
+	y['OBS_p53']/=max(y['OBS_p53']) if max(y['OBS_p53']) > 0.0 else y['OBS_p53']
+	y['OBS_p27']/= max(y['OBS_p27']) if max(y['OBS_p27']) > 0.0 else y['OBS_p27']
 	y['OBS_Int']/=max(y['OBS_Int']) if max(y['OBS_Int']) > 0.0 else y['OBS_Int']
-	y['OBS_Mdm2']/=max(y['OBS_Mdm2'])
-	y['OBS_p21']=y['OBS_p21']/max(y['OBS_p21'])
-	y['OBS_p16']=y['OBS_p16']/max(y['OBS_p16'])
-	y['OBS_Rb']=y['OBS_Rb']/max(y['OBS_Rb'])
-	y['OBS_CycD_CDK46']=y['OBS_CycD_CDK46']/max(y['OBS_CycD_CDK46'])
+	y['OBS_Mdm2']/=max(y['OBS_Mdm2']) if max(y['OBS_Mdm2']) > 0.0 else y['OBS_Mdm2']
+	y['OBS_p21']/=max(y['OBS_p21']) if max(y['OBS_p21']) > 0.0 else y['OBS_p21']
+	y['OBS_p16']/=max(y['OBS_p16']) if max(y['OBS_p16']) > 0.0 else y['OBS_p16']
+	y['OBS_Rb']/=max(y['OBS_Rb']) if max(y['OBS_Rb']) > 0.0 else y['OBS_Rb']
+	y['OBS_CycD_CDK46']/=max(y['OBS_CycD_CDK46']) if max(y['OBS_CycD_CDK46']) > 0.0 else y['OBS_CycD_CDK46']
 
   
 t = linspace(0,3000,300)
@@ -140,7 +141,7 @@ for i in range(len(model.species)):
 #  
 #   
 set_dna_damage(0.0)
-y = odesolve(model,t,verbose=True, atol=1e-12, rtol=1e-12)
+y = odesolve(model,t,verbose=True, rtol = 1e-15, atol = 1e-15)
 normalize_output(y)
  
 pl.figure()
@@ -153,7 +154,7 @@ for obs in ["OBS_p53", "OBS_Mdm2", "OBS_Int", "OBS_p21"]:
 pl.legend(loc='upper right')
 #####
 set_dna_damage(0.005)
-y = odesolve(model,t,verbose=True, atol=1e-16, rtol= 1e-16)
+y = odesolve(model,t,verbose=True, rtol = 1e-15, atol = 1e-15)
 normalize_output(y)
 
 pl.figure()
