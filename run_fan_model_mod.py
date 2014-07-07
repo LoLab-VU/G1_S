@@ -3,6 +3,7 @@ from pysb import *
 from pysb.util import *
 from pysb.macros import *
 from pysb.bng import *
+from pysb.core import *
 from pysb.integrate import odesolve
 import pylab as pl
 from numpy import linspace
@@ -36,23 +37,33 @@ generate_equations(model, verbose=True)
 for i in range(len(model.species)):
 	print i, model.species[i]
 print
-print model.odes[27]
-print model.parameters['k67'].value
 # quit()
   
-# for monomers in model.monomers:
-#     print monomers
-# print
-#   
-# for i in range(len(model.parameters)):
-#     print str(i) + ":"
-#     print model.parameters[i]
+for monomers in model.monomers:
+    print monomers
+print
+  
+for i in range(len(model.parameters)):
+    print str(i) + ":"
+    print model.parameters[i]
+ 
+ 
+for initial_conditions in model.initial_conditions:
+    print initial_conditions
+print
 
-#  
-# for initial_conditions in model.initial_conditions:
-#     print initial_conditions
-# print
-#  
+for x in model.parameters_initial_conditions():
+    print x, ":", x.value
+print 
+print
+
+for x in model.parameters_unused():
+    print x, ":", x.value
+print 
+
+for x in model.parameters_rules():
+    print x
+
 # for obs in model.observables:
 #     print obs, ":", obs.species, ",", obs.coefficients
 #     obs_string = ''
@@ -67,13 +78,17 @@ print model.parameters['k67'].value
 #     print rules
 # print
 #  
-# for i in range(len(model.species)):
-#     print str(i)+":", model.species[i]
-# print
-# 
-# for i in range(len(model.odes)):
-#     print str(i)+":", model.odes[i]
-# print
+for i in range(len(model.species)):
+    print str(i)+":", model.species[i]
+print
+ 
+for i in range(len(model.odes)):
+    print str(i)+":", model.odes[i]
+print
+
+for i in range(len(model.parameters)):
+    print str(i)+":", model.parameters[i], model.parameters[i].value
+quit()  
  
 from pysb.generator.bng import BngGenerator
 print BngGenerator(model).get_content()
@@ -126,17 +141,17 @@ t = linspace(0,3000,300)
 # 	print observables
 # print
   
-for rules in model.rules:
-	print rules
-print
-  
-for i in range(len(model.species)):
-    print str(i) + ":"
-    print model.species[i]
-   
-for i in range(len(model.species)):
-    print str(i) + ":"
-    print model.odes[i]
+# for rules in model.rules:
+# 	print rules
+# print
+#   
+# for i in range(len(model.species)):
+#     print str(i) + ":"
+#     print model.species[i]
+#    
+# for i in range(len(model.species)):
+#     print str(i) + ":"
+#     print model.odes[i]
 # quit()
 #  
 #   
