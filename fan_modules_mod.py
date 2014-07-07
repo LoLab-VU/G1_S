@@ -184,7 +184,7 @@ def declare_initial_conditions():
 	Initial(CycA(c=None), Y2_0)	#2
 	Initial(CDK46(Y='u',b=None,c=None), Y3_0)	#3
 	Initial(CDK2(Y='u',b=None,c=None), Y4_0)	#4
-	Initial(CycD(c=1) % CDK46(Y='p',b=None,c=1), Y5_0)	#5
+	Initial(CycD(c=1) % CDK46(Y='u',b=None,c=1), Y5_0)	#5
 	Initial(CycE(c=1) % CDK2(Y='u',b=None,c=1), Y6_0)	#6
 	Initial(CycE(c=1) % CDK2(Y='p',b=None,c=1), Y7_0)	#7
 	Initial(CycA(c=1) % CDK2(Y='u',b=None,c=1), Y8_0)	#8

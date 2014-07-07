@@ -88,7 +88,7 @@ print
 
 for i in range(len(model.parameters)):
     print str(i)+":", model.parameters[i], model.parameters[i].value
-quit()  
+# quit()  
  
 from pysb.generator.bng import BngGenerator
 print BngGenerator(model).get_content()
