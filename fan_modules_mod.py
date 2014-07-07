@@ -230,7 +230,7 @@ def declare_observables():
 	Observable("OBS_p21", p21(b=None))
 	Observable("OBS_p16", p16(b=None))
 	Observable("OBS_Rb", Rb(b=None, Y='u'))
-	Observable("OBS_CycD_CDK46", CycD(c=1) % CDK46(Y='p',b=None,c=1))
+	Observable("OBS_CycD_CDK46", CycD(c=1) % CDK46(Y='u',b=None,c=1))
 	Observable("signal", Signal())
 	Observable("signal_damp", SignalDamp())
 
@@ -266,16 +266,16 @@ def p16_p27_inhibition():
 							  [p16(b=None),		k40,	None]])	#11,13
 	# Inhibition by p27
 	bind_table_complex([[										p27(b=None)	],
-						[CycD(c=1) % CDK46(Y='p',b=None,c=1),	(k20, k21)	],	#5
+						[CycD(c=1) % CDK46(Y='u',b=None,c=1),	(k20, k21)	],	#5
 						[CycE(c=1) % CDK2( Y='p',b=None,c=1),	(k24, k25)	],	#7
 						[CycA(c=1) % CDK2( Y='p',b=None,c=1),	(k30, k31)	]],	#9
 						'b', 'b')
 						
 	#TODO: Clean up below
-	equilibrate(CycD(c=None) + CDK46(Y='u',b=None,c=None), CycD(c=1) % CDK46(Y='p',b=None,c=1), [k3, k4])			#3	Activation of CDK4/6 by CycD
-	Rule("R4", CycD(c=1) % CDK46(Y='p',b=None,c=1) >> CDK46(Y='u',b=None,c=None), k13)	#4	Degradation of bound CycD
+	equilibrate(CycD(c=None) + CDK46(Y='u',b=None,c=None), CycD(c=1) % CDK46(Y='u',b=None,c=1), [k3, k4])			#3	Activation of CDK4/6 by CycD
+	Rule("R4", CycD(c=1) % CDK46(Y='u',b=None,c=1) >> CDK46(Y='u',b=None,c=None), k13)	#4	Degradation of bound CycD
 	
-	Rule("Degrade_p16_from_CycD_CDK46", p16(b=None) + CycD(c=1) % CDK46(Y='p',b=None,c=1) >>  p16(b=None), k44)   		#14 Degradation of p16/CycD/CDK4/6 complex
+	Rule("Degrade_p16_from_CycD_CDK46", p16(b=None) + CycD(c=1) % CDK46(Y='u',b=None,c=1) >>  p16(b=None), k44)   		#14 Degradation of p16/CycD/CDK4/6 complex
 	catalyze_one_step(CycE(c=1) % CDK2(Y='p',b=None,c=1), p27(b=None), None, k35)		#6	Degradation of p27 by CycE/CDK2 complex
 # 	catalyze_one_step(CycA(c=1) % CDK2(Y='p',b=None,c=1), p27(b=None), None, k36)		#8	Degradation of p27 by CycA/CDK2 complex
 	Rule("Degrade_p27_from_CycA_CDK2P", p27(b=None) + CycA(c=1) % CDK2(Y='p',b=None,c=1) >> CycA(c=1) % CDK2(Y='p',b=None,c=1), k36)
@@ -318,7 +318,7 @@ def Rb_E2F_activation():
 							  [Rb(Y='u',b=None),	k56, k57]])	#42,43
 
 	#32	Phosphorylation of Rb/E2F complex by CycD/CDK4/6 complex	TODO: change to "catalyze_state"
-	catalyze_one_step(CycD(c=1) % CDK46(Y='p',b=None,c=1), Rb(Y='u',b=2) % E2F(b=2), Rb(Y='pp',b=2) % E2F(b=2), k46)
+	catalyze_one_step(CycD(c=1) % CDK46(Y='u',b=None,c=1), Rb(Y='u',b=2) % E2F(b=2), Rb(Y='pp',b=2) % E2F(b=2), k46)
 	#33 Phosphorylation of Rb/E2F complex by p27/CycD/CDK4/6 complex	TODO: change to "catalyze_state"
 	catalyze_one_step(CycD(c=1) % CDK46(Y='p',b=2,c=1) % p27(b=2), Rb(Y='u',b=2) % E2F(b=2), Rb(Y='pp',b=2) % E2F(b=2), k47)
 	#34 Phosphorylation of Rb/E2F complex by p21/CycD/CDK4/6 complex	TODO: change to "catalyze_state"
@@ -352,7 +352,7 @@ def DNA_damage_pathway():
 							  
 	# Inhibition by p21
 	bind_table_complex([[										p21(b=None)	],
-						[CycD(c=1) % CDK46(Y='p',b=None,c=1),	(k18, k19)	],	#45
+						[CycD(c=1) % CDK46(Y='u',b=None,c=1),	(k18, k19)	],	#45
 						[CycE(c=1) % CDK2( Y='p',b=None,c=1),	(k26, k27)	],	#46
 						[CycA(c=1) % CDK2( Y='p',b=None,c=1),	(k32, k33)	]],	#47
 						'b','b')

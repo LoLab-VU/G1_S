@@ -9,6 +9,170 @@ import pylab as pl
 from numpy import linspace
 from sympy import sympify
 
+# def set_volume(vol):
+#     
+# #     alias_model_components(model)
+# #     Parameter("Vol", vol)                #Volume
+#     global Na_V
+#     Na_V = constants.N_A * vol              #1/[]
+#     
+#     # ***2nd Order Reactions*** (divide by Avogadro's Number * Volume)
+#     model.parameters['k3'].value /= Na_V
+#     model.parameters['k4'].value /= Na_V
+#     model.parameters['k5'].value /= Na_V
+#     model.parameters['k6'].value /= Na_V
+#     model.parameters['k7'].value /= Na_V
+#     model.parameters['k8'].value /= Na_V
+#     model.parameters['k10'].value /= Na_V
+#     model.parameters['km10'].value /= Na_V
+#     model.parameters['k11'].value /= Na_V
+#     model.parameters['k12'].value /= Na_V
+#     model.parameters['k17'].value /= Na_V
+#   
+#     
+#     
+#     
+#     # ***1st Order Reactions*** - LEAVE ALONE!
+# #     model.parameters['k1'].value
+# #     model.parameters['k2'].value
+# #     model.parameters['km3'].value
+# #     model.parameters['km4'].value
+# #     model.parameters['km5'].value
+# #     model.parameters['km6'].value
+# #     model.parameters['km11'].value
+# #     model.parameters['k13'].value
+# #     model.parameters['k15'].value
+# #     model.parameters['km17'].value
+# #     model.parameters['k18'].value
+# #     model.parameters['k19'].value
+# #     model.parameters['k21'].value
+# #     model.parameters['k23'].value
+# #     model.parameters['k25'].value
+# #     model.parameters['k30'].value
+# #     model.parameters['k32'].value
+# #     model.parameters['k33'].value
+# #     model.parameters['k34'].value
+# #     model.parameters['k_ex'].value
+# #     model.parameters['n'].value
+#     
+#     # ***0th Order Reactions*** (multiply by Avogadro's Number * Volume)
+#     model.parameters['k14'].value *= Na_V
+#     model.parameters['k16'].value *= Na_V
+#     model.parameters['k20'].value *= Na_V
+#     model.parameters['k22'].value *= Na_V
+#     model.parameters['k28'].value *= Na_V
+#     model.parameters['v_in'].value *= Na_V
+#     
+#     # ***In Functions *** (act differently)
+#     model.parameters['k27'].value /= Na_V
+#     model.parameters['k31'].value /= Na_V
+#     model.parameters['k_damp'].value /= Na_V
+#     model.parameters['Deg_0'].value /= Na_V
+#     model.parameters['k9'].value *= Na_V
+#     model.parameters['k24'].value *= Na_V
+#     model.parameters['k_m'].value *= Na_V
+#     model.parameters['k26'].value /= (Na_V * Na_V)
+#     model.parameters['k_deg'].value /= (Na_V * Na_V)
+#     
+#     # ***Initial Condition Parameters*** (multiply by Avogadro's Number * Volume)
+#     model.parameters['X1_0'].value *= Na_V
+#     model.parameters['X1pre_0'].value *= Na_V
+#     model.parameters['X2_0'].value *= Na_V
+#     model.parameters['X3_0'].value *= Na_V
+#     model.parameters['X4_0'].value *= Na_V
+#     model.parameters['X5_0'].value *= Na_V
+#     model.parameters['X6_0'].value *= Na_V
+#     model.parameters['X7_0'].value *= Na_V
+#     model.parameters['X8_0'].value *= Na_V
+#     model.parameters['X9_0'].value *= Na_V
+#     model.parameters['X10_0'].value *= Na_V
+#     model.parameters['X11_0'].value *= Na_V
+#     model.parameters['X12_0'].value *= Na_V
+#     model.parameters['X13_0'].value *= Na_V
+#     model.parameters['X14_0'].value *= Na_V
+#     model.parameters['X15_0'].value *= Na_V
+#     model.parameters['X16_0'].value *= Na_V
+#     model.parameters['X17_0'].value *= Na_V
+#     model.parameters['DDS_0'].value *= Na_V
+
+###
+# Kinetic parameters of proposed model
+#     Parameter("k1", 5.00e-03)     #
+#     Parameter("k2", 5.00e-04)     #
+#     Parameter("k3", 5.00e-03)     # 
+#     Parameter("k4", 2.50e-03)     # 
+#     Parameter("k5", 7.50e-02)     # 
+#     Parameter("k6", 2.50e-03)     #
+#     Parameter("k7", 1.25e-03)     #
+#     Parameter("k8", 2.50e-04)     #
+#     Parameter("k9", 8.00e-04)     #
+#     Parameter("k10", 5.00e-04)    #
+#     Parameter("k11", 1.00e-03)    #
+#     Parameter("k12", 2.00e-04)    #
+#     Parameter("k13", 5.00e-04)    #
+#     Parameter("k14", 5.00e-04)    #
+#     Parameter("k15", 5.00e-04)    #
+#     Parameter("k16", 5.00e-04)    #
+#     Parameter("k17", 2.00e-03)    #
+#     Parameter("k18", 5.00e-04)    #
+#     Parameter("k19", 5.00e-03)    #
+#     Parameter("k20", 5.00e-04)    #
+#     Parameter("k21", 5.00e-05)    #
+#     Parameter("k22", 2.50e-02)    #
+#     Parameter("k23", 1.75e-03)    #
+#     Parameter("k24", 2.25e-02)    # 
+#     Parameter("k25", 1.75e-04)    #
+#     Parameter("k26", 2.25e-02)    #
+#     Parameter("k27", 1.75e-04)    #
+#     Parameter("k28", 1.90e-02)    #
+#     Parameter("k29", 5.00e-04)    #
+#     Parameter("k30", 2.50e-03)    # 
+#     Parameter("k31", 1.75e-04)    #
+#     Parameter("k32", 2.50e-03)    #
+#     Parameter("k33", 1.75e-04)    #
+#     Parameter("k34", 5.00e-08)    #
+#     Parameter("k35", 1.00e-02)    # 
+#     Parameter("k36", 1.50e-03)    # 
+#     Parameter("k37", 5.00e-05)    #
+#     Parameter("k38", 1.00e-02)    #
+#     Parameter("k39", 5.00e-03)    #
+#     Parameter("k40", 2.00e-03)    #
+#     Parameter("k41", 5.00e-05)    #
+#     Parameter("k42", 1.00e-04)    #
+#     Parameter("k43", 5.00e-04)    #
+#     Parameter("k44", 5.00e-04)    #
+#     Parameter("k45", 5.00e-05)    #
+#     Parameter("k46", 2.50e-03)    #
+#     Parameter("k47", 2.50e-03)    #
+#     Parameter("k48", 2.50e-03)    #
+#     Parameter("k49", 4.00e-02)    #
+#     Parameter("k50", 2.50e-03)    #
+#     Parameter("k51", 5.00e-08)    #
+#     Parameter("k52", 5.00e-07)    #
+#     Parameter("k53", 5.00e-05)    #
+#     Parameter("k54", 1.00e-02)    #
+#     Parameter("k55", 5.00e-08)    #
+#     Parameter("k56", 5.00e-05)    #
+#     Parameter("k57", 5.00e-03)    #
+#     Parameter("k58", 5.00e-05)    #
+#     Parameter("k59", 5.00e-04)    #
+#     Parameter("k60", 1.00e-04)    #
+#     Parameter("k61", 1.50e+00)    #
+#     Parameter("k62", 1.00e-03)    #
+#     Parameter("k63", 9.40e-04)    #
+#     Parameter("k64", 2.00e-02)    #
+#     Parameter("k65", 9.50e+00)    #
+#     Parameter("k66", 1.00e+01)    #
+#     Parameter("k67", 5.00e-03)    #
+#     Parameter("k68", 5.00e-02)    #
+#     Parameter("k69", 8.00e-04)    #
+#     Parameter("k70", 6.00e+00)    #
+#     Parameter("k71", 4.00e-03)    #
+#     Parameter("k72", 1.00e-08)    #
+#     Parameter("k73", 7.72e-01)    #
+#     Parameter("k74", 5.56e-02)    #
+#     Parameter("k75", 2.00e-02)    #
+
 # ***Generate ODEs and Plot***
 
 declare_monomers()
