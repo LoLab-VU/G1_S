@@ -172,7 +172,7 @@ def declare_parameters():
 	Parameter("k73", 7.72e-01)	#
 	Parameter("k74", 5.56e-02)	#
 	Parameter("k75", 2.00e-02)	#
-# 	Parameter("One", 1)			#
+	Parameter("One", 1)			#
 # 	Parameter("Zero", 0)		#
 # 	Parameter("Fast", 1000)		#
 # 	Parameter("Slow", 1e-9)		#
@@ -239,10 +239,10 @@ def declare_observables():
 ## Implemented by Corey Hayford ##
 
 def declare_functions():
-	Expression("create_p16", sympify("k41/((1 + k42*OBS_Rb) - (k43*OBS_p16 - k44*OBS_p16*OBS_CycD_CDK46))"))
-	Expression("create_Rb", sympify("k58/(1 + k59*OBS_p16)"))
+	Expression("create_p16", sympify("k41/((One + k42*OBS_Rb) - (k43*OBS_p16 + k44*OBS_p16*OBS_CycD_CDK46))"))
+	Expression("create_Rb", sympify("k58/(One + k59*OBS_p16)"))
 	Expression("create_Mdm2", sympify("k66*OBS_Int**9/(k65**9 + OBS_Int**9)"))
-	Expression("create_Int", sympify("(k70*OBS_p53*signal)/(1 + k71*OBS_p53*OBS_Mdm2)"))
+	Expression("create_Int", sympify("(k70*OBS_p53*signal)/(One + k71*OBS_p53*OBS_Mdm2)"))
 	Expression("sig_deg", sympify("k74 - k73*(signal-signal_damp)"))
 	Expression("kdamp_DDS0", sympify("k75*DDS_0"))
 

@@ -8,92 +8,130 @@ from pysb.integrate import odesolve
 import pylab as pl
 from numpy import linspace
 from sympy import sympify
+from scipy import constants
 
-# def set_volume(vol):
-#     
-# #     alias_model_components(model)
-# #     Parameter("Vol", vol)                #Volume
-#     global Na_V
-#     Na_V = constants.N_A * vol              #1/[]
-#     
-#     # ***2nd Order Reactions*** (divide by Avogadro's Number * Volume)
-#     model.parameters['k3'].value /= Na_V
-#     model.parameters['k4'].value /= Na_V
-#     model.parameters['k5'].value /= Na_V
-#     model.parameters['k6'].value /= Na_V
-#     model.parameters['k7'].value /= Na_V
-#     model.parameters['k8'].value /= Na_V
-#     model.parameters['k10'].value /= Na_V
-#     model.parameters['km10'].value /= Na_V
-#     model.parameters['k11'].value /= Na_V
-#     model.parameters['k12'].value /= Na_V
-#     model.parameters['k17'].value /= Na_V
-#   
-#     
-#     
-#     
-#     # ***1st Order Reactions*** - LEAVE ALONE!
-# #     model.parameters['k1'].value
-# #     model.parameters['k2'].value
-# #     model.parameters['km3'].value
-# #     model.parameters['km4'].value
-# #     model.parameters['km5'].value
-# #     model.parameters['km6'].value
-# #     model.parameters['km11'].value
-# #     model.parameters['k13'].value
-# #     model.parameters['k15'].value
-# #     model.parameters['km17'].value
-# #     model.parameters['k18'].value
-# #     model.parameters['k19'].value
-# #     model.parameters['k21'].value
-# #     model.parameters['k23'].value
-# #     model.parameters['k25'].value
-# #     model.parameters['k30'].value
-# #     model.parameters['k32'].value
-# #     model.parameters['k33'].value
-# #     model.parameters['k34'].value
-# #     model.parameters['k_ex'].value
-# #     model.parameters['n'].value
-#     
-#     # ***0th Order Reactions*** (multiply by Avogadro's Number * Volume)
-#     model.parameters['k14'].value *= Na_V
-#     model.parameters['k16'].value *= Na_V
-#     model.parameters['k20'].value *= Na_V
-#     model.parameters['k22'].value *= Na_V
-#     model.parameters['k28'].value *= Na_V
-#     model.parameters['v_in'].value *= Na_V
-#     
-#     # ***In Functions *** (act differently)
-#     model.parameters['k27'].value /= Na_V
-#     model.parameters['k31'].value /= Na_V
-#     model.parameters['k_damp'].value /= Na_V
-#     model.parameters['Deg_0'].value /= Na_V
-#     model.parameters['k9'].value *= Na_V
-#     model.parameters['k24'].value *= Na_V
-#     model.parameters['k_m'].value *= Na_V
-#     model.parameters['k26'].value /= (Na_V * Na_V)
-#     model.parameters['k_deg'].value /= (Na_V * Na_V)
-#     
-#     # ***Initial Condition Parameters*** (multiply by Avogadro's Number * Volume)
-#     model.parameters['X1_0'].value *= Na_V
-#     model.parameters['X1pre_0'].value *= Na_V
-#     model.parameters['X2_0'].value *= Na_V
-#     model.parameters['X3_0'].value *= Na_V
-#     model.parameters['X4_0'].value *= Na_V
-#     model.parameters['X5_0'].value *= Na_V
-#     model.parameters['X6_0'].value *= Na_V
-#     model.parameters['X7_0'].value *= Na_V
-#     model.parameters['X8_0'].value *= Na_V
-#     model.parameters['X9_0'].value *= Na_V
-#     model.parameters['X10_0'].value *= Na_V
-#     model.parameters['X11_0'].value *= Na_V
-#     model.parameters['X12_0'].value *= Na_V
-#     model.parameters['X13_0'].value *= Na_V
-#     model.parameters['X14_0'].value *= Na_V
-#     model.parameters['X15_0'].value *= Na_V
-#     model.parameters['X16_0'].value *= Na_V
-#     model.parameters['X17_0'].value *= Na_V
-#     model.parameters['DDS_0'].value *= Na_V
+def set_volume(vol):
+    global Na_V
+    Na_V = constants.N_A * vol              #1/[]
+        
+    # ***2nd Order Reactions*** (divide by Avogadro's Number * Volume)
+    model.parameters['k3'].value /= Na_V
+    model.parameters['k20'].value /= Na_V
+    model.parameters['k24'].value /= Na_V
+    model.parameters['k30'].value /= Na_V
+    model.parameters['k13'].value /= Na_V
+    model.parameters['k44'].value /= Na_V
+    model.parameters['k35'].value /= Na_V
+    model.parameters['k36'].value /= Na_V
+    model.parameters['k7'].value /= Na_V
+    model.parameters['k11'].value /= Na_V
+    model.parameters['k17'].value /= Na_V
+    model.parameters['k22'].value /= Na_V
+    model.parameters['k28'].value /= Na_V
+    model.parameters['k46'].value /= Na_V
+    model.parameters['k47'].value /= Na_V
+    model.parameters['k48'].value /= Na_V
+    model.parameters['k49'].value /= Na_V
+    model.parameters['k50'].value /= Na_V
+    model.parameters['k54'].value /= Na_V
+    model.parameters['k45'].value /= Na_V
+    model.parameters['k18'].value /= Na_V
+    model.parameters['k26'].value /= Na_V
+    model.parameters['k32'].value /= Na_V   
+        
+    # ***1st Order Reactions*** - LEAVE ALONE!
+#     model.parameters['k72'].value
+#     model.parameters['k4'].value
+#     model.parameters['k2'].value
+#     model.parameters['k21'].value
+#     model.parameters['k25'].value
+#     model.parameters['k31'].value
+#     model.parameters['k6'].value
+#     model.parameters['k10'].value
+#     model.parameters['k69'].value
+#     model.parameters['k8'].value
+#     model.parameters['k12'].value
+#     model.parameters['k68'].value
+#     model.parameters['k5'].value
+#     model.parameters['k9'].value
+#     model.parameters['k14'].value
+#     model.parameters['k15'].value
+#     model.parameters['k16'].value
+#     model.parameters['k23'].value
+#     model.parameters['k29'].value
+#     model.parameters['k53'].value
+#     model.parameters['k57'].value
+#     model.parameters['k51'].value
+#     model.parameters['k55'].value
+#     model.parameters['k39'].value
+#     model.parameters['k62'].value
+#     model.parameters['k64'].value
+#     model.parameters['k67'].value
+#     model.parameters['k19'].value
+#     model.parameters['k27'].value
+#     model.parameters['k33'].value
+#     model.parameters['k38'].value
+#     model.parameters['k61'].value
+        
+    # ***0th Order Reactions*** (multiply by Avogadro's Number * Volume)
+    model.parameters['k1'].value *= Na_V
+    model.parameters['k34'].value *= Na_V
+    model.parameters['k40'].value *= Na_V
+    model.parameters['k52'].value *= Na_V
+    model.parameters['k56'].value *= Na_V
+    model.parameters['k37'].value *= Na_V
+    model.parameters['k60'].value *= Na_V
+    model.parameters['k63'].value *= Na_V
+     
+        
+    # ***In Functions *** (act differently)
+    model.parameters['k41'].value *= (Na_V * Na_V)
+    model.parameters['k44'].value /= Na_V
+    model.parameters['k58'].value *= (Na_V * Na_V)
+    model.parameters['k65'].value *= Na_V
+    model.parameters['k66'].value *= Na_V
+    model.parameters['k71'].value /= Na_V
+    model.parameters['k73'].value /= (Na_V * Na_V)
+    model.parameters['k74'].value /= Na_V
+    model.parameters['k75'].value /= Na_V
+    model.parameters['One'].value *= Na_V
+    
+    # ** Should not be changed **
+#     model.parameters['k42'].value /= Na_V
+#     model.parameters['k43'].value /= Na_V
+#     model.parameters['k70'].value 
+#     model.parameters['k59'].value /= Na_V
+        
+    # ***Initial Condition Parameters*** (multiply by Avogadro's Number * Volume)
+    model.parameters['Y0_0'].value *= Na_V
+    model.parameters['Y1_0'].value *= Na_V
+    model.parameters['Y2_0'].value *= Na_V
+    model.parameters['Y3_0'].value *= Na_V
+    model.parameters['Y4_0'].value *= Na_V
+    model.parameters['Y5_0'].value *= Na_V
+    model.parameters['Y6_0'].value *= Na_V
+    model.parameters['Y7_0'].value *= Na_V
+    model.parameters['Y8_0'].value *= Na_V
+    model.parameters['Y9_0'].value *= Na_V
+    model.parameters['Y10_0'].value *= Na_V
+    model.parameters['Y11_0'].value *= Na_V
+    model.parameters['Y12_0'].value *= Na_V
+    model.parameters['Y13_0'].value *= Na_V
+    model.parameters['Y14_0'].value *= Na_V
+    model.parameters['Y15_0'].value *= Na_V
+    model.parameters['Y16_0'].value *= Na_V
+    model.parameters['Y17_0'].value *= Na_V
+    model.parameters['Y18_0'].value *= Na_V
+    model.parameters['Y19_0'].value *= Na_V
+    model.parameters['Y20_0'].value *= Na_V
+    model.parameters['Y21_0'].value *= Na_V
+    model.parameters['Y22_0'].value *= Na_V
+    model.parameters['Y23_0'].value *= Na_V
+    model.parameters['Y24_0'].value *= Na_V
+    model.parameters['Y25_0'].value *= Na_V
+    model.parameters['Y26_0'].value *= Na_V
+    model.parameters['Y27_0'].value *= Na_V
+    model.parameters['DDS_0'].value *= Na_V
 
 ###
 # Kinetic parameters of proposed model
@@ -186,6 +224,8 @@ CDK2_activation()
 Rb_E2F_activation()
 DNA_damage_pathway()
 
+set_volume(1.0e-20)
+
 
 print model.rules
 # quit()
@@ -258,17 +298,17 @@ from pysb.generator.bng import BngGenerator
 print BngGenerator(model).get_content()
 
 def normalize_output(y):
-	y['OBS_CycA']/=max(y['OBS_CycA']) if max(y['OBS_CycA']) > 0.0 else y['OBS_CycA']
-	y['OBS_CycE']/=max(y['OBS_CycE']) if max(y['OBS_CycE']) > 0.0 else y['OBS_CycE']
-	y['OBS_E2F']/=max(y['OBS_E2F']) if max(y['OBS_E2F']) > 0.0 else y['OBS_E2F']
-	y['OBS_p53']/=max(y['OBS_p53']) if max(y['OBS_p53']) > 0.0 else y['OBS_p53']
-	y['OBS_p27']/= max(y['OBS_p27']) if max(y['OBS_p27']) > 0.0 else y['OBS_p27']
-	y['OBS_Int']/=max(y['OBS_Int']) if max(y['OBS_Int']) > 0.0 else y['OBS_Int']
-	y['OBS_Mdm2']/=max(y['OBS_Mdm2']) if max(y['OBS_Mdm2']) > 0.0 else y['OBS_Mdm2']
-	y['OBS_p21']/=max(y['OBS_p21']) if max(y['OBS_p21']) > 0.0 else y['OBS_p21']
-	y['OBS_p16']/=max(y['OBS_p16']) if max(y['OBS_p16']) > 0.0 else y['OBS_p16']
-	y['OBS_Rb']/=max(y['OBS_Rb']) if max(y['OBS_Rb']) > 0.0 else y['OBS_Rb']
-	y['OBS_CycD_CDK46']/=max(y['OBS_CycD_CDK46']) if max(y['OBS_CycD_CDK46']) > 0.0 else y['OBS_CycD_CDK46']
+	y['OBS_CycA']/=max(y['OBS_CycA']) if max(y['OBS_CycA']) > 0.0 else 1
+	y['OBS_CycE']/=max(y['OBS_CycE']) if max(y['OBS_CycE']) > 0.0 else 1
+	y['OBS_E2F']/=max(y['OBS_E2F']) if max(y['OBS_E2F']) > 0.0 else 1
+	y['OBS_p53']/=max(y['OBS_p53']) if max(y['OBS_p53']) > 0.0 else 1
+	y['OBS_p27']/= max(y['OBS_p27']) if max(y['OBS_p27']) > 0.0 else 1
+	y['OBS_Int']/=max(y['OBS_Int']) if max(y['OBS_Int']) > 0.0 else 1
+	y['OBS_Mdm2']/=max(y['OBS_Mdm2']) if max(y['OBS_Mdm2']) > 0.0 else 1
+	y['OBS_p21']/=max(y['OBS_p21']) if max(y['OBS_p21']) > 0.0 else 1
+	y['OBS_p16']/=max(y['OBS_p16']) if max(y['OBS_p16']) > 0.0 else 1
+	y['OBS_Rb']/=max(y['OBS_Rb']) if max(y['OBS_Rb']) > 0.0 else 1
+	y['OBS_CycD_CDK46']/=max(y['OBS_CycD_CDK46']) if max(y['OBS_CycD_CDK46']) > 0.0 else 1
 
   
 t = linspace(0,3000,300)
@@ -293,18 +333,16 @@ t = linspace(0,3000,300)
 # 	print monomers
 # print
 #   
-# for parameters in model.parameters:
-# 	print parameters
-# print
+for i in range(len(model.parameters)):
+	print str(i)+":", model.parameters[i], "=", model.parameters[i].value
+print
 #   
 # for initial_conditions in model.initial_conditions:
 # 	print initial_conditions
 # print
 #   
-# for observables in model.observables:
-# 	print observables
-# print
-  
+
+   
 # for rules in model.rules:
 # 	print rules
 # print
@@ -313,13 +351,22 @@ t = linspace(0,3000,300)
 #     print str(i) + ":"
 #     print model.species[i]
 #    
-# for i in range(len(model.species)):
-#     print str(i) + ":"
-#     print model.odes[i]
+for i in range(len(model.odes)):
+    print str(i) + ":", model.odes[i]
+print
+
+for e in model.expressions:
+    print e, e.expand_expr()
+print
+
+for obs in model.observables:
+    print obs, obs.species, obs.coefficients
+print
 # quit()
 #  
 #   
-set_dna_damage(0.0)
+
+set_dna_damage(0.0 * Na_V)
 y = odesolve(model,t,verbose=True, rtol = 1e-15, atol = 1e-15)
 normalize_output(y)
  
@@ -332,7 +379,7 @@ for obs in ["OBS_p53", "OBS_Mdm2", "OBS_Int", "OBS_p21"]:
     pl.plot(t, y[obs], label=obs)
 pl.legend(loc='upper right')
 #####
-set_dna_damage(0.005)
+set_dna_damage(0.005 * Na_V)
 y = odesolve(model,t,verbose=True, rtol = 1e-15, atol = 1e-15)
 normalize_output(y)
 
