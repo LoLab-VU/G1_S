@@ -1,4 +1,4 @@
-import G1_S_V1 as m
+import G1_S_v1 as m
 import pylab as pl
 from pysb.integrate import odesolve
 from sympy import sympify
