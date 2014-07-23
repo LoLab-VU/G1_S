@@ -122,8 +122,9 @@ normalize_output(y)
 
 pl.figure()
 for obs in ["OBS_p27", "OBS_E2F", "OBS_CycE", "OBS_CycA"]:
-    pl.plot(t, y[obs], label=obs)
+    pl.plot(t, y[obs], label=re.match(r"OBS_(\w+)", obs).group(1))
 pl.legend(loc=0)
+pl.ylim(ymax=1.2)
 pl.xlabel("Time (arbitrary units)")
 pl.ylabel("Protein Level")
 pl.title("Protein Dynamics (No DNA Damage)")
@@ -131,8 +132,9 @@ pl.savefig("G1_S Cell Cycle No DNA Damage1.png", format= "png")
 
 pl.figure()
 for obs in ["OBS_p53", "OBS_Mdm2", "OBS_Int", "OBS_p21"]:
-    pl.plot(t, y[obs], label=obs)
+    pl.plot(t, y[obs], label=re.match(r"OBS_(\w+)", obs).group(1))
 pl.legend(loc=0)
+pl.ylim(ymax=1.2)
 pl.xlabel("Time (arbitrary units)")
 pl.ylabel("Protein Level")
 pl.title("Protein Dynamics (No DNA Damage)")
@@ -148,8 +150,9 @@ normalize_output(y)
 
 pl.figure()
 for obs in ["OBS_p53", "OBS_E2F", "OBS_CycE", "OBS_CycA"]:
-	pl.plot(t, y[obs], label=obs)
+	pl.plot(t, y[obs], label=re.match(r"OBS_(\w+)", obs).group(1))
 pl.legend(loc=0)
+pl.ylim(ymax=1.2)
 pl.xlabel("Time (arbitrary units)")
 pl.ylabel("Protein Level")
 pl.title("Protein Dynamics with DNA Damage(0.005)")
@@ -157,8 +160,9 @@ pl.savefig("G1_S Cell Cycle DNA Damage1.png", format= "png")
 
 pl.figure()
 for obs in ["OBS_p53", "OBS_Mdm2", "OBS_Int", "OBS_p21"]:
-    pl.plot(t, y[obs], label=obs)
+    pl.plot(t, y[obs], label=re.match(r"OBS_(\w+)", obs).group(1))
 pl.legend(loc=0)
+pl.ylim(ymax=1.2)
 pl.xlabel("Time (arbitrary units)")
 pl.ylabel("Protein Level")
 pl.title("Protein Dynamics with DNA Damage(0.005)")
